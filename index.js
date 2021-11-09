@@ -1,15 +1,15 @@
-import fs, { readJson } from 'fs-extra';
+import fs from 'fs-extra';
 import { parse, evaluate } from 'groq-js';
 
-let groq = function ([query]) {
+let groq = async ([query]) => {
   let tree = parse(query);
-  return async function (dataset) {
+  return async (dataset) => {
     let result = await evaluate(tree, { dataset });
     return await result.get();
   };
 };
 
-let pokedex = await readJson('./pokedex.json');
+let pokedex = await fs.readJson('./pokedex.json');
 let query = await groq`*[]`;
 
 let result = await query(data);
