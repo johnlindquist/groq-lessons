@@ -12,6 +12,6 @@ let groq = async ([query]) => {
 let pokedex = await fs.readJson('./pokedex.json');
 let query = await groq`*[]`;
 
-let result = await query(data);
+let result = await query(pokedex);
 
 console.log(result);
