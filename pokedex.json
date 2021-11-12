@@ -1,5 +1,4 @@
-{
-  "pokemon": [
+[
     {
       "id": 1,
       "num": "001",
@@ -3475,4 +3474,4 @@
       "weaknesses": ["Bug", "Ghost", "Dark"]
     }
   ]
-}
+
