@@ -12,7 +12,9 @@ let people = [
 ]
 
 let query = await groq`
-*[last == "Lindquist"].first
+*[last == "Lindquist"]
+    {"name": first + " " + last}
+        .name
 `
 
 let result = await query(people)
