@@ -4,17 +4,27 @@ let people = [
   {
     first: "John",
     last: "Lindquist",
+    age: 40,
   },
   {
-    first: "Mindy",
+    first: "Ben",
     last: "Lindquist",
+    age: 15,
   },
 ]
 
 let query = await groq`
-*[last == "Lindquist"]
-    {"name": first + " " + last}
-        .name
+*[]
+    {
+        "name": first + " " + last,
+        "group": select(
+            age < 30 => "young",
+            "old"
+        )
+    }
+    {
+        "sentence": name + " is " + group
+    }.sentence
 `
 
 let result = await query(people)
