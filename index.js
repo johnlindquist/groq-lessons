@@ -5,11 +5,11 @@ let pokedex = await fs.readJson("./pokedex.json")
 
 let query = await groq`
 *[]
-[0..4]
+[0..10]
 {
-    id,
+    height,
     name
-}
+} | order(height desc)
 `
 
 let result = await query(pokedex)
