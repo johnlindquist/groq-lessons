@@ -4,9 +4,12 @@ import fs from "fs-extra"
 let pokedex = await fs.readJson("./pokedex.json")
 
 let query = await groq`
-*[egg in ["5 km", "2 km"]]{
-    "hatch": name + " hatches in " + egg
-}.hatch
+*[]
+[0..4]
+{
+    id,
+    name
+}
 `
 
 let result = await query(pokedex)
