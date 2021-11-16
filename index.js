@@ -4,7 +4,7 @@ import fs from "fs-extra"
 let pokedex = await fs.readJson("./pokedex.json")
 
 let query = await groq`
-*[]
+*[!(num in *[].next_evolution[].num)]
 [0..5]
 {
     name,   
