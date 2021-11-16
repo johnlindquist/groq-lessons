@@ -1,32 +1,14 @@
 import { groq } from "./lib.js"
+import fs from "fs-extra"
 
-let people = [
-  {
-    first: "John",
-    last: "Lindquist",
-    age: 40,
-  },
-  {
-    first: "Ben",
-    last: "Lindquist",
-    age: 15,
-  },
-]
+let pokedex = await fs.readJson("./pokedex.json")
 
 let query = await groq`
-*[]
-    {
-        "name": first + " " + last,
-        "group": select(
-            age < 30 => "young",
-            "old"
-        )
-    }
-    {
-        "sentence": name + " is " + group
-    }.sentence
+*[egg in ["5 km", "2 km"]]{
+    "hatch": name + " hatches in " + egg
+}.hatch
 `
 
-let result = await query(people)
+let result = await query(pokedex)
 
 console.log(result)
